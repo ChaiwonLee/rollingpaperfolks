@@ -1,92 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교수님을 위한 롤링페이퍼</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Nanum Gothic', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .swiper { width: 80%; max-width: 600px; height: 400px; }
+        .swiper-slide { 
+            background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center;
+        }
+        .message { font-size: 1.5rem; color: #333; margin-bottom: 20px; line-height: 1.6; }
+        .author { font-size: 1.1rem; color: #888; }
+        .loading { font-size: 1.2rem; color: #555; }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ko"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;교수님을 위한 롤링페이퍼&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body { background-color: #f0f2f5; font-family: 'Nanum Gothic', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.swiper { width: 80%; max-width: 600px; height: 400px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.swiper-slide {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.message { font-size: 1.5rem; color: #333; margin-bottom: 20px; line-height: 1.6; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.author { font-size: 1.1rem; color: #888; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.loading { font-size: 1.2rem; color: #555; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="swiper"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="swiper-wrapper" id="paper-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="swiper-slide loading"&gt;메시지를 불러오는 중입니다...&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="swiper-button-next"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="swiper-button-prev"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// ★ 본인의 구글 시트 CSV 링크를 아래 따옴표 안에 넣으세요!</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const CSV_URL = 'https://docs.google.com/spreadsheets/d/1gmE3hEl1nNZougcoSYIlVlW57NoQ_GRoAu6rljkE7Dg/edit?usp=sharing';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>async function loadMessages() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(CSV_URL);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.text();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const rows = data.split('\n').slice(1); // 첫 번째 줄(제목) 제외</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const wrapper = document.getElementById('paper-content');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>wrapper.innerHTML = ''; // 로딩 문구 제거</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>rows.forEach(row =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// 구글 시트의 열 순서에 맞춰 수정 (보통 타임스탬프, 이름, 메시지 순)</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const columns = row.split(',');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if(columns.length &gt;= 2) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const name = columns[1];<span class="Apple-converted-space">    </span>// 2번째 칸: 이름</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const message = columns[2]; // 3번째 칸: 메시지</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const slide = `</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="swiper-slide"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="message"&gt;" ${message} "&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="author"&gt;- ${name} 학생 -&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>wrapper.innerHTML += slide;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// 슬라이더 초기화</p>
-<p class="p1"><span class="Apple-converted-space">                </span>new Swiper('.swiper', {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>loop: true,</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>console.error('데이터 로드 실패:', error);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('paper-content').innerHTML = '데이터를 가져오지 못했습니다.';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>loadMessages();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+    <div class="swiper">
+        <div class="swiper-wrapper" id="paper-content">
+            <div class="swiper-slide loading">메시지를 불러오는 중입니다...</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        // ★ 본인의 구글 시트 CSV 링크를 아래 따옴표 안에 넣으세요!
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1gmE3hEl1nNZougcoSYIlVlW57NoQ_GRoAu6rljkE7Dg/edit?usp=sharing';
+
+        async function loadMessages() {
+            try {
+                const response = await fetch(CSV_URL);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1); // 첫 번째 줄(제목) 제외
+                
+                const wrapper = document.getElementById('paper-content');
+                wrapper.innerHTML = ''; // 로딩 문구 제거
+
+                rows.forEach(row => {
+                    // 구글 시트의 열 순서에 맞춰 수정 (보통 타임스탬프, 이름, 메시지 순)
+                    const columns = row.split(',');
+                    if(columns.length >= 2) {
+                        const name = columns[1];    // 2번째 칸: 이름
+                        const message = columns[2]; // 3번째 칸: 메시지
+
+                        const slide = `
+                            <div class="swiper-slide">
+                                <div class="message">" ${message} "</div>
+                                <div class="author">- ${name} 학생 -</div>
+                            </div>
+                        `;
+                        wrapper.innerHTML += slide;
+                    }
+                });
+
+                // 슬라이더 초기화
+                new Swiper('.swiper', {
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                    loop: true,
+                });
+
+            } catch (error) {
+                console.error('데이터 로드 실패:', error);
+                document.getElementById('paper-content').innerHTML = '데이터를 가져오지 못했습니다.';
+            }
+        }
+
+        loadMessages();
+    </script>
 </body>
 </html>
