@@ -374,7 +374,7 @@
     white-space: nowrap; 
     overflow: visible;
   ">
-    Chai Lee (PhD Student) · Grace Choi (PhD Candidate) · And more to be added in 2027...
+    Chai Lee (PhD Student) · Grace Choi (PhD Candidate) · And more to be added...
   </div>
 </div>
   
@@ -549,9 +549,8 @@
         memo.innerHTML = `
           <p class="memo-text">${escapeHTML(message)}</p>
           <div class="memo-sign">
-            <span class="dash">—</span>
+            <span class="dash">— From. </span>
             <span class="name">${escapeHTML(name || '익명')}</span>
-            <span class="dash">- From.</span>
           </div>
         `;
         placeMemo(memo, canvas, totalCount);
