@@ -381,7 +381,7 @@
 </footer>
 
 <script>
-  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSM_XVLDiywYvUCsAFDruP9SdQJ3HhtT-ZQhDhkf9eFkIvz9pIGGTXBWyMP8x5lOMEF2FOv2V9bHcHY/pub?output=csv';
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSM_XVLDiywYvUCsAFDruP9SdQJ3HhtT-ZQhDhkf9eFkIvz9pIGGTXBWyMP8x5lOMEF2FOv2V9bHcHY/pub?gid=863066054&single=true&output=csv';
 
   function parseCSV(text){
     const rows = [];
@@ -539,8 +539,8 @@
       state.remove();
 
       rows.forEach((cols, idx) => {
-        const name = (cols[1] || '').trim();
-        const message = (cols[2] || '').trim();
+        const name = (cols[0] || '').trim(); // 닉네임
+        const message = (cols[1] || '').trim(); // 메세지
         if (!message) return;
 
         const memo = document.createElement('div');
