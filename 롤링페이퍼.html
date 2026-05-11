@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>마음을 담은 롤링페이퍼</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gaegu:wght@400;700&family=Nanum+Brush+Script&family=Nanum+Myeongjo:wght@400;700;800&family=Song+Myung&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#fbf6e9;
+    --paper-edge:#e8dcc0;
+    --ink:#2b2418;
+    --ink-soft:#5a4a32;
+    --accent:#8a3a2a;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Nanum Myeongjo", serif;
+    color:var(--ink);
+    background:
+      radial-gradient(ellipse at 50% 0%, #efe2c6 0%, #e7d9bf 40%, #d6c39f 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* 상단 헤더 */
+  header{
+    text-align:center;
+    padding:42px 20px 8px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .eyebrow{
+    font-family:"Song Myung", serif;
+    letter-spacing:.5em;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+    text-indent:.5em;
+  }
+  h1.title{
+    font-family:"Nanum Myeongjo", serif;
+    font-weight:800;
+    font-size:clamp(30px, 5vw, 46px);
+    margin:0;
+    letter-spacing:.04em;
+  }
+  h1.title .ornament{
+    color:var(--accent);
+    font-family:"Song Myung", serif;
+    margin:0 .35em;
+    font-weight:400;
+  }
+  .subtitle{
+    margin:14px auto 0;
+    max-width:580px;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.7;
+  }
+  .subtitle .hint{
+    display:inline-block;
+    margin-top:10px;
+    padding:4px 14px;
+    font-family:"Nanum Pen Script", cursive;
+    font-size:20px;
+    color:var(--accent);
+    border:1px dashed var(--accent);
+    border-radius:999px;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:.55; transform:translateY(0); }
+    50%{ opacity:1; transform:translateY(-2px); }
+  }
+  .rule{
+    display:flex; align-items:center; justify-content:center;
+    gap:14px; margin:18px 0 6px; color:var(--accent);
+  }
+  .rule .line{width:80px; height:1px; background:linear-gradient(90deg, transparent, #8a3a2a 40%, #8a3a2a 60%, transparent)}
+  .rule .dot{width:6px; height:6px; border-radius:50%; background:var(--accent)}
+
+  /* 전지 */
+  .stage{
+    margin:30px auto 80px;
+    width:min(1100px, 96vw);
+    padding:60vh 0 20px;
+  }
+  .wall{
+    position:relative;
+    width:100%;
+    border-radius:4px;
+    background:
+      repeating-linear-gradient(0deg, rgba(120,90,40,.025) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(120,90,40,.02) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at 50% 0%, #fdfaf0 0%, #f7eed4 60%, #ecddb8 100%);
+    border:1px solid #d8c89f;
+    box-shadow:
+      0 1px 0 #fff inset,
+      0 -2px 8px rgba(120,80,30,.05) inset,
+      0 26px 40px -20px rgba(0,0,0,.4),
+      0 10px 20px -8px rgba(0,0,0,.22);
+    padding:80px 50px 100px;
+  }
+  /* 끝없이 이어지는 전지 느낌의 가장자리 톤 */
+  .wall::before, .wall::after{
+    content:""; position:absolute; left:0; right:0; height:36px;
+    pointer-events:none;
+  }
+  .wall::before{ top:0; background:linear-gradient(180deg, rgba(110,75,30,.10), transparent);}
+  .wall::after{ bottom:0; background:linear-gradient(0deg, rgba(110,75,30,.10), transparent);}
+
+  .wall-title{
+    text-align:center;
+    font-family:"Nanum Pen Script", cursive;
+    font-size:54px;
+    color:var(--accent);
+    margin:0 0 6px;
+    letter-spacing:.05em;
+    transform:rotate(-1.2deg);
+  }
+  .wall-subtitle{
+    text-align:center;
+    font-family:"Nanum Myeongjo", serif;
+    font-size:14px;
+    color:var(--ink-soft);
+    letter-spacing:.3em;
+    margin:0 0 18px;
+  }
+  .wall-divider{
+    display:flex; align-items:center; justify-content:center;
+    gap:12px; margin:0 auto 28px;
+    color:var(--accent);
+  }
+  .wall-divider .l{width:60px; height:1px; background:linear-gradient(90deg, transparent, var(--accent) 60%);}
+  .wall-divider .r{width:60px; height:1px; background:linear-gradient(90deg, var(--accent), transparent 60%);}
+  .wall-divider .dot{width:5px; height:5px; border-radius:50%; background:var(--accent);}
+
+  /* 종이 테이프 */
+  .tape{
+    position:absolute;
+    width:130px; height:34px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 45%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.18) 0 6px, transparent 6px 12px),
+      rgba(255, 235, 150, .55);
+    border-left:1px dashed rgba(180,140,40,.35);
+    border-right:1px dashed rgba(180,140,40,.35);
+    box-shadow:
+      0 4px 10px rgba(80,50,10,.18),
+      0 1px 0 rgba(255,255,255,.4) inset;
+    z-index:5;
+  }
+  /* 테이프 양 끝의 찢어진 듯한 느낌 */
+  .tape::before, .tape::after{
+    content:""; position:absolute; top:0; bottom:0; width:8px;
+    background:rgba(255, 235, 150, .55);
+  }
+  .tape::before{ left:-7px; clip-path:polygon(100% 0, 30% 20%, 80% 40%, 20% 60%, 70% 80%, 100% 100%); }
+  .tape::after { right:-7px; clip-path:polygon(0 0, 70% 20%, 20% 40%, 80% 60%, 30% 80%, 0 100%); }
+
+  .tape.t-tl{ top:-17px; left:60px; transform:rotate(-5deg); }
+  .tape.t-tr{ top:-17px; right:60px; transform:rotate(6deg); }
+  .tape.t-bl{ bottom:-17px; left:80px; transform:rotate(6deg); }
+  .tape.t-br{ bottom:-17px; right:80px; transform:rotate(-5deg); }
+
+  /* 메모 영역 — 랜덤 절대좌표 배치 */
+  .canvas{
+    position:relative;
+    width:100%;
+    min-height:600px;
+    margin-top:10px;
+  }
+
+  /* 손글씨 메모 */
+  .memo{
+    position:absolute;
+    max-width:280px;
+    padding:6px 10px 10px;
+    font-family:"Gaegu", "Nanum Pen Script", cursive;
+    color:#2a2317;
+    text-shadow:0 0 .5px currentColor;
+    transition:opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1), filter .9s ease;
+    will-change:opacity, transform;
+    cursor:default;
+  }
+  .memo .memo-text{
+    margin:0;
+    font-size:22px;
+    line-height:32px;
+    font-weight:700;
+    white-space:pre-wrap;
+    word-break:keep-all;
+    text-wrap:pretty;
+  }
+  .memo .memo-sign{
+    display:flex; align-items:baseline; justify-content:flex-end;
+    gap:6px; margin-top:8px;
+    font-family:"Nanum Pen Script", cursive;
+    color:#3a2f1c;
+  }
+  .memo .memo-sign .dash{ color:var(--ink-soft); font-size:13px; font-family:"Nanum Myeongjo", serif;}
+  .memo .memo-sign .name{ font-size:26px; }
+
+  /* 보여지기 전 상태 */
+  .memo.hidden{
+    opacity:0;
+    transform:translateY(8px) scale(.96) rotate(var(--rot, 0deg));
+    filter:blur(4px);
+    pointer-events:none;
+  }
+  /* 보여진 후 */
+  .memo.revealed{
+    opacity:1;
+    transform:rotate(var(--rot, 0deg));
+    filter:none;
+    animation:inkBleed .9s ease both;
+  }
+  @keyframes inkBleed{
+    0%{ filter:blur(3px); letter-spacing:.06em; }
+    60%{ filter:blur(.6px); letter-spacing:.01em; }
+    100%{ filter:none; letter-spacing:0; }
+  }
+
+  /* 펜 색 변주 */
+  .ink-black{ color:#2b2317; }
+  .ink-blue { color:#1f2f4a; }
+  .ink-brown{ color:#3a2317; }
+  .ink-green{ color:#22301a; }
+  .ink-red  { color:#4a1f1f; }
+  .ink-navy { color:#23264a; }
+
+  /* 클릭 안내 오버레이 */
+  .reveal-hint{
+    position:absolute;
+    pointer-events:none;
+    font-family:"Nanum Pen Script", cursive;
+    color:var(--accent);
+    font-size:22px;
+    opacity:.7;
+    transform:translate(-50%, -50%) rotate(-6deg);
+    user-select:none;
+  }
+  .reveal-hint .arrow{ font-size:30px; display:inline-block; transform:translateY(4px) rotate(20deg);}
+  .reveal-hint.fade{
+    transition:opacity .8s ease;
+    opacity:0;
+  }
+
+  /* 클릭 잉크 자국 (잠깐 보이고 사라짐) */
+  .ink-splash{
+    position:absolute;
+    width:60px; height:60px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(138,58,42,.35) 0%, rgba(138,58,42,.12) 40%, transparent 70%);
+    transform:translate(-50%, -50%) scale(.3);
+    pointer-events:none;
+    animation:splash .8s ease-out forwards;
+  }
+  @keyframes splash{
+    0%{ transform:translate(-50%,-50%) scale(.3); opacity:.7;}
+    100%{ transform:translate(-50%,-50%) scale(2); opacity:0;}
+  }
+
+  /* 진행 표시 */
+  .progress{
+    position:fixed;
+    right:18px; bottom:18px;
+    background:rgba(45,30,15,.85);
+    color:#f3e7c8;
+    padding:8px 16px;
+    border-radius:999px;
+    font-family:"Song Myung", serif;
+    font-size:13px;
+    letter-spacing:.2em;
+    box-shadow:0 6px 16px rgba(0,0,0,.3);
+    z-index:50;
+  }
+  .progress .num{ color:#fff; font-weight:700;}
+
+  /* 상태 메시지 */
+  .state-card{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    font-family:"Nanum Myeongjo", serif;
+    color:var(--ink-soft);
+    font-size:18px;
+    line-height:1.8;
+  }
+
+  /* 푸터 */
+  footer{
+    text-align:center; padding:0 20px 50px;
+    color:var(--ink-soft);
+    font-size:13px;
+    letter-spacing:.2em;
+  }
+  footer .corner{ color:var(--accent); margin:0 .6em;}
+
+  @media (max-width:640px){
+    .wall{ padding:60px 22px 80px; }
+    .wall-title{ font-size:42px; }
+    .memo{ max-width:220px; }
+    .memo .memo-text{ font-size:20px; line-height:29px; }
+  }
+</style>
+</head>
+<body style="font-family: -webkit-standard">
+
+<header>
+  <p class="eyebrow">두 손 모아 적은 마음</p>
+  <h1 class="title">감사의 <span class="ornament">·</span> 마음 한 장</h1>
+  <div class="rule"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+  <p class="subtitle">
+    한 분 한 분 정성껏 적어 내려 주신 글들을<br>
+    한 장의 종이 위에 모아 두었습니다.
+    <br>
+    <span class="hint">천천히 아래로 내려 보세요 ↓</span>
+  </p>
+</header>
+
+<section class="stage">
+  <div class="wall" id="wall">
+    <span class="tape t-tl"></span>
+    <span class="tape t-tr"></span>
+    <span class="tape t-bl"></span>
+    <span class="tape t-br"></span>
+    <h2 class="wall-title">마음을 모아</h2>
+    <p class="wall-subtitle">정성으로 적어 주신 귀한 글들</p>
+    <div class="wall-divider"><span class="l"></span><span class="dot"></span><span class="r"></span></div>
+
+    <div class="canvas" id="canvas">
+      <div class="state-card" id="state">마음을 담은 글들을 불러오고 있습니다…</div>
+    </div>
+  </div>
+</section>
+
+<div class="progress" id="progress" style="display:none;">
+  나타난 글 &nbsp;<span class="num" id="cur">0</span> / <span class="num" id="total">0</span>
+</div>
+
+<footer>
+  <span class="corner">❖</span> 한 글자 한 글자에 마음을 담아 <span class="corner">❖</span>
+</footer>
+
+<script>
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSM_XVLDiywYvUCsAFDruP9SdQJ3HhtT-ZQhDhkf9eFkIvz9pIGGTXBWyMP8x5lOMEF2FOv2V9bHcHY/pub?output=csv';
+
+  function parseCSV(text){
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for (let i = 0; i < text.length; i++){
+      const c = text[i];
+      if (inQuotes){
+        if (c === '"' && text[i+1] === '"'){ field += '"'; i++; }
+        else if (c === '"'){ inQuotes = false; }
+        else { field += c; }
+      } else {
+        if (c === '"'){ inQuotes = true; }
+        else if (c === ','){ row.push(field); field = ''; }
+        else if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+        else if (c === '\r'){ }
+        else { field += c; }
+      }
+    }
+    if (field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(r => r.some(v => v && v.trim() !== ''));
+  }
+
+  function escapeHTML(s){
+    return (s||'').replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    })[m]);
+  }
+
+  const INK_CLASSES = ['ink-black','ink-blue','ink-brown','ink-green','ink-red','ink-navy'];
+
+  // 메모 간 충돌 방지를 위한 간단한 박스 보관소
+  const placedBoxes = [];
+
+  function rand(min, max){ return Math.random() * (max - min) + min; }
+
+  // 메모 사이 여유 공간 (px)
+  const GAP_X = 36;
+  const GAP_Y = 28;
+
+  function overlaps(a, b){
+    return !(a.right + GAP_X < b.left || a.left > b.right + GAP_X || a.bottom + GAP_Y < b.top || a.top > b.bottom + GAP_Y);
+  }
+
+  /**
+   * 충돌 방지: 시작 Y에서 아래로 내려가면서 비어 있는 위치를 탐색한다.
+   * 절대 겹치지 않도록, 못 찾으면 캔버스를 늘리고 더 내려간다.
+   */
+  function placeMemo(memo, canvas, idx){
+    memo.style.visibility = 'hidden';
+    memo.style.left = '0px';
+    memo.style.top = '0px';
+    canvas.appendChild(memo);
+    const w = memo.offsetWidth;
+    const h = memo.offsetHeight;
+
+    const canvasW = canvas.offsetWidth;
+    const margin = 12;
+    const maxX = Math.max(margin, canvasW - w - margin);
+
+    // 첫 메모는 위쪽에서 시작, 이후엔 현재까지 놓인 박스들의 가장 아래에서 살짝 위쪽부터
+    const lowestBottom = placedBoxes.length
+      ? Math.max(...placedBoxes.map(b => b.bottom))
+      : 10;
+    // 이미 놓인 박스 중 가장 낮은 위치보다 좀 더 위에서부터 탐색을 시작해
+    // 같은 가로줄에 여러 개가 자연스럽게 흩뿌려지도록 한다.
+    let searchY = Math.max(10, lowestBottom - (h + GAP_Y) * 1.2);
+
+    let placedBox = null;
+    const stepX = 18;
+    const stepY = 14;
+
+    // 캔버스를 필요한 만큼 늘려가며 반드시 비충돌 위치를 찾는다.
+    outer:
+    for (let pass = 0; pass < 600; pass++){
+      // 각 Y에서 가로 방향으로 랜덤 시작점부터 양옆으로 훑는다.
+      const xs = [];
+      const startX = rand(margin, maxX);
+      for (let x = startX; x <= maxX; x += stepX) xs.push(x);
+      for (let x = startX - stepX; x >= margin; x -= stepX) xs.push(x);
+      // 살짝 흔들어서 격자 느낌 제거
+      for (let i = xs.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [xs[i], xs[j]] = [xs[j], xs[i]];
+      }
+
+      for (const x of xs){
+        const box = { left:x, top:searchY, right:x + w, bottom:searchY + h };
+        const hit = placedBoxes.some(b => overlaps(b, box));
+        if (!hit){
+          placedBox = box;
+          break outer;
+        }
+      }
+      searchY += stepY;
+    }
+
+    if (!placedBox){
+      // 최후의 수단: 가장 아래에 안전하게 쌓는다.
+      const safeY = (placedBoxes.length ? Math.max(...placedBoxes.map(b => b.bottom)) : 10) + GAP_Y;
+      placedBox = { left: margin, top: safeY, right: margin + w, bottom: safeY + h };
+    }
+
+    memo.style.left = placedBox.left + 'px';
+    memo.style.top  = placedBox.top  + 'px';
+    placedBoxes.push(placedBox);
+
+    // 캔버스 높이 확장
+    const needH = placedBox.bottom + 80;
+    if (needH > canvas.offsetHeight){
+      canvas.style.minHeight = needH + 'px';
+    }
+
+    memo.style.visibility = 'visible';
+  }
+
+  let totalCount = 0;
+  let revealedCount = 0;
+  function updateProgress(){
+    document.getElementById('cur').textContent = revealedCount;
+    document.getElementById('total').textContent = totalCount;
+  }
+
+  function setupScrollReveal(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.classList.contains('hidden')){
+          entry.target.classList.remove('hidden');
+          entry.target.classList.add('revealed');
+          revealedCount++;
+          updateProgress();
+          io.unobserve(entry.target);
+        }
+      });
+    }, {
+      // 메모가 뷰포트 아래쪽으로 진입할 때부터 차근차근 떠오르도록
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.15
+    });
+    document.querySelectorAll('.memo.hidden').forEach(m => io.observe(m));
+  }
+
+  async function loadMessages(){
+    const canvas = document.getElementById('canvas');
+    const state  = document.getElementById('state');
+    try{
+      const res = await fetch(CSV_URL);
+      const text = await res.text();
+      const rows = parseCSV(text).slice(1);
+
+      if (!rows.length){
+        state.innerHTML = '아직 도착한 글이 없습니다.<br>곧 따뜻한 마음들이 도착할 거예요.';
+        return;
+      }
+
+      state.remove();
+
+      rows.forEach((cols, idx) => {
+        const name = (cols[1] || '').trim();
+        const message = (cols[2] || '').trim();
+        if (!message) return;
+
+        const memo = document.createElement('div');
+        memo.className = `memo hidden ${INK_CLASSES[idx % INK_CLASSES.length]}`;
+        memo.style.setProperty('--rot', rand(-4, 4).toFixed(2) + 'deg');
+        memo.innerHTML = `
+          <p class="memo-text">${escapeHTML(message)}</p>
+          <div class="memo-sign">
+            <span class="dash">—</span>
+            <span class="name">${escapeHTML(name || '익명')}</span>
+            <span class="dash">드림</span>
+          </div>
+        `;
+        placeMemo(memo, canvas, totalCount);
+        totalCount++;
+      });
+
+      if (!totalCount){
+        canvas.appendChild(state);
+        state.innerHTML = '아직 도착한 글이 없습니다.';
+        return;
+      }
+
+      document.getElementById('progress').style.display = 'block';
+      updateProgress();
+      setupScrollReveal();
+
+    }catch(e){
+      console.error(e);
+      state.innerHTML = '마음을 불러오지 못했습니다.<br>잠시 후 다시 시도해 주세요.';
+    }
+  }
+
+  loadMessages();
+</script>
+</body>
+</html>
