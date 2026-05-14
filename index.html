@@ -441,7 +441,7 @@
 
   // 메모 사이 여유 공간 (px)
   const GAP_X = 36;
-  const GAP_Y = 28;
+  const GAP_Y = 60;
 
   function overlaps(a, b){
     return !(a.right + GAP_X < b.left || a.left > b.right + GAP_X || a.bottom + GAP_Y < b.top || a.top > b.bottom + GAP_Y);
@@ -457,7 +457,7 @@
     memo.style.top = '0px';
     canvas.appendChild(memo);
     const w = memo.offsetWidth;
-    const h = memo.offsetHeight;
+    const h = memo.offsetHeight + 24;
 
     const canvasW = canvas.offsetWidth;
     const margin = 12;
@@ -511,7 +511,7 @@
     placedBoxes.push(placedBox);
 
     // 캔버스 높이 확장
-    const needH = placedBox.bottom + 80;
+    const needH = placedBox.bottom + 140;
     if (needH > canvas.offsetHeight){
       canvas.style.minHeight = needH + 'px';
     }
